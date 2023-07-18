@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Geri Sayaç</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: rgb(29, 28, 28);
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      .countdown-wrapper {
+        padding: 20px;
+        border: 20px solid rgb(192, 192, 192);
+        border-radius: 360px;
+      }
+      .countdown-wrapper-end {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border: 20px solid rgb(192, 192, 192);
+        border-radius: 360px;
+      }
+
+      .paris{
+        font-size: 100px;
+        color: white;
+      }
+
+      .year{
+        font-size: 100px;
+        color: white;
+      }
+
+      .countdown-wrapper-inside {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        padding-left: 6rem;
+        padding-right: 6rem;
+        background-image: url(circle.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 1000px 250px;
+      }
+      .countdown-item {
+        font-size: 84px;
+        margin: 10px;
+      }
+
+      .months-days-hours {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .months {
+        font-size: 27px;
+        color: rgb(3, 131, 62);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 3rem;
+      }
+
+      .days-hours {
+        padding-right: 12rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0rem;
+      }
+
+      .days {
+        font-size: 27px;
+        color: rgb(252, 177, 49);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: left;
+      }
+
+      .hours {
+        font-size: 27px;
+        color: rgb(0, 129, 200);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .minutes-seconds {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .minutes {
+        font-size: 27px;
+        color: rgb(0, 129, 200);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding-top: 1.25rem;
+        margin-right: 5rem;
+      }
+
+      .seconds {
+        font-size: 27px;
+        color: rgb(173, 25, 47);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding-bottom: 1.25rem;
+        margin-right: 2rem;
+      }
+
+      .min{
+        letter-spacing: 1px;
+      }
+
+      #months {
+        color: rgb(3, 131, 62);
+      }
+      #days {
+        color: rgb(252, 177, 49);
+      }
+      #hours {
+        color: rgb(0, 129, 200);
+      }
+      #minutes {
+        color: rgb(0, 129, 200);
+        padding: 0px;
+        margin: 0px;
+      }
+      #seconds {
+        color: rgb(173, 25, 47);
+        padding: 0px;
+        margin: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="countdown-wrapper">
+      <div class="countdown-wrapper">
+        <div class="countdown-wrapper-end">
+          <div class="paris">PARİS</div>
+          <div class="countdown-wrapper-inside">
+            <div class="months-days-hours">
+              <div class="months">
+                <div>AY</div>
+                <div class="countdown-item" id="months">0 ay</div>
+              </div>
+
+              <div class="days-hours">
+                <div class="days">
+                  <div>GÜN</div>
+                  <div class="countdown-item" id="days">0 gün</div>
+                </div>
+                <div class="hours">
+                  <div>SAAT</div>
+                  <div class="countdown-item" id="hours">0 gün</div>
+                </div>
+              </div>
+            </div>
+            <div class="minutes-seconds">
+              <div class="minutes">
+                <div class="min">DAKİKA</div>
+                <div class="countdown-item" id="minutes">0 dakika</div>
+              </div>
+              <div class="seconds">
+                <div class="countdown-item" id="seconds">0 saniye</div>
+                <div class="sec">SANİYE</div>
+              </div>
+            </div>
+          </div>
+          <div class="year">2024</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Hedef tarih
+      var targetDate = new Date("2024-07-25T23:59:59").getTime();
+
+      // Sayaçı her 1 saniyede bir güncelleyen fonksiyon
+      var countdown = setInterval(function () {
+        // Şu anki tarih
+        var now = new Date().getTime();
+
+        // Hedef tarih ile şu anki tarih arasındaki fark
+        var timeRemaining = targetDate - now;
+
+        // Farkı ay, gün, saat, dakika ve saniye olarak hesaplayın
+        var months = Math.floor(timeRemaining / (1000 * 60 * 60 * 24 * 30));
+        var days = Math.floor(
+          (timeRemaining % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24)
+        );
+        var hours = Math.floor(
+          (timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        var minutes = Math.floor(
+          (timeRemaining % (1000 * 60 * 60)) / (1000 * 60)
+        );
+        var seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+        // Geri sayımı HTML'e yerleştirin
+        document.getElementById("months").innerHTML = months;
+        document.getElementById("days").innerHTML = days;
+        document.getElementById("hours").innerHTML = hours;
+        document.getElementById("minutes").innerHTML = minutes;
+        document.getElementById("seconds").innerHTML = seconds;
+
+        // Eğer hedef tarih geçtiyse, sayaçı durdur
+        if (timeRemaining < 0) {
+          clearInterval(countdown);
+          document.getElementById("countdown").innerHTML = "Süre doldu!";
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>
